@@ -32,7 +32,7 @@ class ReportController extends Controller
         }
 
         if($request->has("end_foundation_date")) {
-            $query->where("foundation_date", "<=", $request->query("end_foundation_date"));
+            $query->where("foundation_date", "<", $request->query("end_foundation_date"));
         }
 
         $cities = $query->with(['neighborhoods' => function ($query) {
