@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|unique:app\models\user,email|email',
+            'email' => 'required|unique:users,email|email',
             'password' => 'required|min:8'
         ]);
 
@@ -44,6 +44,6 @@ class AuthController extends Controller
             ]);
         }
 
-        return response()->json(["message" => "Not authorized"], 401);
+        return response()->json(["message" => "Email ou senha incorretos!"], 401);
     }
 }
