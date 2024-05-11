@@ -20,6 +20,12 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "state" => "required|min:2|string",
+            "foundation_date" => "required|date"
+        ]);
+
         $city = City::create([
             "name" => $request->input("name"),
             "state" => $request->input("state"),
@@ -44,6 +50,12 @@ class CityController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "state" => "required|min:2|string",
+            "foundation_date" => "required|date"
+        ]);
+
         $city = City::findOrFail($id);
 
         $city->name = $request->input("name");

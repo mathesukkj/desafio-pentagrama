@@ -20,6 +20,11 @@ class NeighborhoodController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "city_id" => "required|integer"
+        ]);
+
         $neighborhood = Neighborhood::create([
             "name" => $request->input("name"),
             "city_id" => $request->input("city_id"),
@@ -43,6 +48,11 @@ class NeighborhoodController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "city_id" => "required|integer"
+        ]);
+
         $neighborhood = Neighborhood::findOrFail($id);
 
         $neighborhood->name = $request->input("name");

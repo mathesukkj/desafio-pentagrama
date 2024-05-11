@@ -20,6 +20,11 @@ class RoadController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "neighborhood_id" => "required|integer"
+        ]);
+
         $road = Road::create([
             "name" => $request->input("name"),
             "neighborhood_id" => $request->input("neighborhood_id"),
@@ -43,6 +48,11 @@ class RoadController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            "name" => "required|min:3|string",
+            "neighborhood_id" => "required|integer"
+        ]);
+
         $road = Road::findOrFail($id);
 
         $road->name = $request->input("name");
