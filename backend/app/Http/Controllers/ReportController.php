@@ -15,7 +15,9 @@ class ReportController extends Controller
         $foundationDateStart = $request->query("start_foundation_date");
         $foundationDateFinal = $request->query("final_foundation_date");
 
-        $cities = City::with('neighborhoods.roads')->get();
+        $cities = City::with(['neighborhoods' => function ($query) {
+            $query->with('roads')->limit(20);
+        }])->paginate(10);
 
         return response()->json([
             "cities" => $cities,
