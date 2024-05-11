@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\NeighborhoodController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,4 +20,5 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::resource('/cities', CityController::class);
     Route::resource('/neighborhoods', NeighborhoodController::class);
     Route::resource('/roads', RoadController::class);
+    Route::get("/report", [ReportController::class, 'report']);
 });
