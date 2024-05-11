@@ -12,7 +12,7 @@ class RoadController extends Controller
      */
     public function index()
     {
-        return Road::all();
+        return Road::paginate(50);
     }
 
     /**
