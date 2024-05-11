@@ -13,6 +13,11 @@ class Neighborhood extends Model
 
     protected $fillable = ["name", "city_id"];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);

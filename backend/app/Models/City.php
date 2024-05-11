@@ -14,6 +14,11 @@ class City extends Model
         "name", "state", "foundation_date"
     ];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     public function neighborhoods(): HasMany
     {
         return $this->hasMany(Neighborhood::class);

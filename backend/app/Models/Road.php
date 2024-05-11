@@ -12,6 +12,11 @@ class Road extends Model
 
     protected $fillable = ["name", "neighborhood_id"];
 
+    protected $hidden = [
+        'updated_at',
+        'created_at'
+    ];
+
     public function neighborhood(): BelongsTo
     {
         return $this->belongsTo(Neighborhood::class);
