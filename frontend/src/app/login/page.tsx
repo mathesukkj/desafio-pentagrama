@@ -1,18 +1,10 @@
 "use client";
 
-import { AuthForm } from "@/components/form/auth-form";
+import { CityForm } from "@/components/form/city-form";
 import { Card, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-export default function Login() {
-  const router = useRouter();
-
-  const handleSubmit = (token: string) => {
-    localStorage.setItem("token", token);
-    router.push("/cities");
-  };
-
+export default function City() {
   return (
     <main className="bg-blue-950 h-screen flex p-16">
       <Card className="p-16 flex flex-col w-full lg:w-1/2 justify-center gap-6 lg:rounded-r-none">
@@ -22,7 +14,7 @@ export default function Login() {
             bem-vindo!
           </span>
         </CardTitle>
-        <AuthForm handleSubmit={handleSubmit} />
+        <CityForm />
       </Card>
       <div className="hidden lg:block w-1/2">
         <Image

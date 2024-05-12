@@ -13,10 +13,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { login } from "@/repositories/login";
+import { login } from "@/repositories/auth/login";
 import React from "react";
 import Link from "next/link";
-import { signup } from "@/repositories/signup";
+import { signup } from "@/repositories/auth/signup";
 
 interface AuthFormProps {
   handleSubmit: (token: string) => void;
@@ -45,19 +45,19 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   handleSubmit,
   option = "login",
 }) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
-  });
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const response =
       option == "login" ? await login(values) : await signup(values);
 
     if (response) handleSubmit(response.token);
   };
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+    },
+  });
 
   return (
     <Form {...form}>
