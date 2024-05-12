@@ -2,16 +2,24 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { CitiesTable } from "@/components/cities/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "@/components/navigation/NavBar";
 import CityModal from "@/components/cities/modal";
 import { listRoads } from "@/repositories/roads/listRoads";
 import { RoadsColumns } from "@/components/roads/columns";
 import { RoadsTable } from "@/components/roads/table";
 import RoadModal from "@/components/roads/modal";
+import { useRouter } from "next/navigation";
 
 export default function Road() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      router.push("/login");
+    }
+  });
 
   const { data } = useQuery({
     queryKey: ["listRoads", currentPage],

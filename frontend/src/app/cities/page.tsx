@@ -1,13 +1,14 @@
 "use client";
 
 import { listCities } from "@/repositories/cities/listCities";
-import { useRouter } from "next/navigation";
+
 import { useQuery } from "@tanstack/react-query";
 import { CitiesTable } from "@/components/cities/table";
 import { CitiesColumns } from "@/components/cities/columns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "@/components/navigation/NavBar";
 import CityModal from "@/components/cities/modal";
+import { useRouter } from "next/navigation";
 
 export default function Cities() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -15,6 +16,14 @@ export default function Cities() {
   const { data } = useQuery({
     queryKey: ["listCities", currentPage],
     queryFn: () => listCities({ page: currentPage }),
+  });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      router.push("/login");
+    }
   });
 
   return (
