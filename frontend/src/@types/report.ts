@@ -1,11 +1,9 @@
 export type ReportResponse = {
-  cities: {
-    current_page: number;
-    data: ReportCity[];
-    last_page: number;
-    per_page: number;
-    total: number;
-  };
+  current_page: number;
+  data: ReportCity[];
+  last_page: number;
+  per_page: number;
+  total: number;
 };
 
 export type ReportCity = {
@@ -20,4 +18,5 @@ export type ReportCity = {
       name: string;
     }[];
   }[];
+  neighborhood_active?: boolean;
 };

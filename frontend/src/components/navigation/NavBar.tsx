@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="fixed py-4 bg-slate-800 text-white top-0 w-full flex  items-center justify-center">
+    <div className="fixed py-4 bg-slate-800 z-50 text-white top-0 w-full flex  items-center justify-center">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -18,6 +18,9 @@ export default function NavBar() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href="/roads">Ruas</Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/report">Relatório</Link>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

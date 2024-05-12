@@ -48,8 +48,6 @@ class ReportController extends Controller
             return $city;
         });
 
-        return response()->json([
-            "cities" => $cities,
-        ]);
+        return response()->json($cities);
     }
 }

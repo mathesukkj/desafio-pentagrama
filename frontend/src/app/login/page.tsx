@@ -4,6 +4,7 @@ import { AuthForm } from "@/components/form/auth-form";
 import { Card, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function City() {
   const router = useRouter();
@@ -12,6 +13,12 @@ export default function City() {
     localStorage.setItem("token", token);
     router.push("/cities");
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/login");
+    }
+  });
 
   return (
     <main className="bg-blue-950 h-screen flex p-16">
