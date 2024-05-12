@@ -32,7 +32,11 @@ export default function Neighborhood() {
       <NavBar />
 
       <main className="bg-white h-screen mt-4 p-16">
-        <div className="flex justify-end my-4">
+        <div className="flex justify-between my-4">
+          <h1 className="text-1xl text-center font-extrabold tracking-tight lg:text-3xl">
+            Bairros cadastrados
+          </h1>
+
           <NeighborhoodModal />
         </div>
 

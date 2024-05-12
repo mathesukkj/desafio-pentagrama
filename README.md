@@ -16,4 +16,29 @@ e rua, data da fundação (período inicial e final). Exibir relacionamentos
 entre os registros, permitir edição e deleção de elementos.
 
 ## Como iniciar o projeto?
+### Backend (usando Sail)
 
+```sh
+cd backend
+
+cp .env.example .env
+
+composer install
+
+sail up -d
+
+```
+
+A API irá iniciar em localhost:80
+
+### Frontend (Node 20)
+
+```sh
+cd frontend
+
+(bun/npm/pnpm/yarn) install
+
+(bun/npm/pnpm/yarn) run dev
+```
+
+O frontend irá iniciar em localhost:3000
