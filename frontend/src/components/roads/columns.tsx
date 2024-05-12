@@ -9,7 +9,7 @@ export const RoadsColumns: ColumnDef<Road>[] = [
     header: "Nome",
   },
   {
-    accessorKey: "neighborhood_id",
+    accessorKey: "neighborhood.name",
     header: "Bairro",
   },
 ];
