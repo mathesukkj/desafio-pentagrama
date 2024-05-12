@@ -16,4 +16,8 @@ export const ReportColumns: ColumnDef<City>[] = [
     accessorKey: "foundation_date",
     header: "Data de fundacao",
   },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+  },
 ];

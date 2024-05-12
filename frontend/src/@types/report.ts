@@ -18,5 +18,4 @@ export type ReportCity = {
       name: string;
     }[];
   }[];
-  neighborhood_active?: boolean;
 };

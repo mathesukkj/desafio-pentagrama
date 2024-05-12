@@ -1,17 +1,17 @@
-import { AuthResponse } from "@/@types/auth";
-import { CityPayload } from "@/@types/city";
+import { City, ListCitiesResponse } from "@/@types/city";
 import { handleError } from "@/components/error/ErrorToast";
 
-export const editCity = async (payload: CityPayload, id: string | number) => {
+export const showCity = async (id: number) => {
   try {
     let token;
     if (typeof window !== "undefined") {
       token = localStorage.getItem("token");
     }
 
-    const res = await fetch(`http://localhost:80/api/cities/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(payload),
+    let url = `http://localhost:80/api/cities/${id}`;
+
+    const res = await fetch(url, {
+      method: "GET",
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + token,
@@ -25,7 +25,7 @@ export const editCity = async (payload: CityPayload, id: string | number) => {
       throw new Error(response.message);
     }
 
-    return response as AuthResponse;
+    return response as City;
   } catch (error) {
     handleError(error as Error);
   }

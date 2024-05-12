@@ -13,14 +13,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useEffect } from "react";
 import { createCity } from "@/repositories/cities/createCity";
 import { editCity } from "@/repositories/cities/editCity";
 import { DatePicker } from "../ui/datepicker";
 import { formatDate } from "date-fns";
+import { showCity } from "@/repositories/cities/showCity";
+import { useQuery } from "@tanstack/react-query";
+import { deleteCity } from "@/repositories/cities/deleteCity";
 
 interface AuthFormProps {
-  formId?: string;
+  formId?: number;
+  onClose?: () => void;
 }
 
 const formSchema = z.object({
@@ -35,12 +39,31 @@ const formSchema = z.object({
     .transform((val) => formatDate(val, "yyyy-MM-dd").toString()),
 });
 
-export const CityForm: React.FC<AuthFormProps> = ({ formId }) => {
+export const CityForm: React.FC<AuthFormProps> = ({
+  formId,
+  onClose = () => {},
+}) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const response = formId
       ? await editCity(values, formId)
       : await createCity(values);
+
+    onClose();
   };
+
+  const handleDelete = async () => {
+    if (formId) {
+      await deleteCity(formId);
+
+      onClose();
+    }
+  };
+
+  const { data } = useQuery({
+    queryKey: ["showCity"],
+    queryFn: () => showCity(formId ? formId : 0),
+    enabled: !!formId,
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,6 +71,14 @@ export const CityForm: React.FC<AuthFormProps> = ({ formId }) => {
       name: "",
     },
   });
+
+  useEffect(() => {
+    if (data) {
+      form.setValue("name", data.name);
+      form.setValue("state", data.state);
+      form.setValue("foundation_date", new Date(data.foundation_date));
+    }
+  }, [data]);
 
   return (
     <Form {...form}>
@@ -72,7 +103,7 @@ export const CityForm: React.FC<AuthFormProps> = ({ formId }) => {
             <FormItem>
               <FormLabel>Nome do estado:</FormLabel>
               <FormControl>
-                <Input placeholder="MG" type="password" {...field} />
+                <Input placeholder="MG" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -96,9 +127,20 @@ export const CityForm: React.FC<AuthFormProps> = ({ formId }) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="block mx-auto">
-          Enviar
-        </Button>
+        {formId ? (
+          <div className="flex gap-4 justify-center">
+            <Button onClick={handleDelete} className="block">
+              Deletar
+            </Button>
+            <Button type="submit" className="block">
+              Enviar
+            </Button>
+          </div>
+        ) : (
+          <Button type="submit" className="block mx-auto">
+            Enviar
+          </Button>
+        )}
       </form>
     </Form>
   );

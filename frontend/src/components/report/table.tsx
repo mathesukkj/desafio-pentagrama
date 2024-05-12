@@ -19,6 +19,8 @@ import {
 import { ReportResponse } from "@/@types/report";
 import { NeighborhoodsTable } from "../neighborhoods/table";
 import { NeighborhoodsColumns } from "../neighborhoods/columns";
+import { Button } from "../ui/button";
+import ReportModal from "./modal";
 
 interface RoadsProps {
   data: ReportResponse;
@@ -90,44 +92,50 @@ export const ReportTable: FC<RoadsProps> = ({
                     key={row.id}
                     onClick={() => row.toggleSelected(!row.getIsSelected())}
                     data-state={row.getIsSelected() && "selected"}
+                    className="border-t-4"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id} onClick={() => {}}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
+                        {cell.column.id != "actions" ? (
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )
+                        ) : (
+                          <ReportModal id={row.original.id as number} />
                         )}
                       </TableCell>
                     ))}
                   </TableRow>
-                  {row.getIsSelected()
-                    ? chunkNeighborhoods(row.original.neighborhoods, 3).map(
-                        (chunk, i) => (
-                          <>
-                            <TableRow key={i}>
-                              {chunk.map((e) => (
-                                <>
-                                  <TableCell>
-                                    <div className="text-md pb-2 border-b">
-                                      <span className="font-bold">Bairro</span>:{" "}
-                                      {e.name}
-                                    </div>
-                                    <span className="font-bold text-md">
-                                      Ruas:{" "}
-                                    </span>
-                                    {e.roads.map((road) => (
-                                      <span className="inline-block pr-3 py-2">
-                                        {road.name}
-                                      </span>
-                                    ))}
-                                  </TableCell>
-                                </>
-                              ))}
-                            </TableRow>
-                          </>
-                        )
-                      )
-                    : null}
+                  {chunkNeighborhoods(row.original.neighborhoods, 3).map(
+                    (chunk, i) => (
+                      <>
+                        <TableRow key={i}>
+                          {chunk.map((e) => (
+                            <>
+                              <TableCell key={e}>
+                                <div className="text-md pb-2 mb-2 border-b">
+                                  <span className="font-bold">Bairro</span>:{" "}
+                                  {e.name}
+                                </div>
+                                <span className="font-bold text-md">
+                                  Ruas:{" "}
+                                </span>
+                                {e.roads.map((road, i) => (
+                                  <span
+                                    key={i}
+                                    className="inline-block pr-3 py-2"
+                                  >
+                                    {road.name}
+                                  </span>
+                                ))}
+                              </TableCell>
+                            </>
+                          ))}
+                        </TableRow>
+                      </>
+                    )
+                  )}
                 </>
               );
             })
