@@ -1,12 +1,15 @@
 import { AuthResponse } from "@/@types/auth";
-import { CityPayload } from "@/@types/city";
+import { NeighborhoodPayload } from "@/@types/neighborhood";
 import { handleError } from "@/components/error/ErrorToast";
 
-export const editCity = async (payload: CityPayload, id: string) => {
+export const editNeighborhood = async (
+  payload: NeighborhoodPayload,
+  id: string
+) => {
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch(`http://localhost:80/api/cities/${id}`, {
+    const res = await fetch(`http://localhost:80/api/login/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
       headers: {

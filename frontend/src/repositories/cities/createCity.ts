@@ -1,5 +1,4 @@
-import { AuthResponse } from "@/@types/auth";
-import { CityPayload } from "@/@types/city";
+import { City, CityPayload } from "@/@types/city";
 import { handleError } from "@/components/error/ErrorToast";
 
 export const createCity = async (payload: CityPayload) => {
@@ -22,7 +21,7 @@ export const createCity = async (payload: CityPayload) => {
       throw new Error(response.message);
     }
 
-    return response as AuthResponse;
+    return response as City;
   } catch (error) {
     handleError(error as Error);
   }
