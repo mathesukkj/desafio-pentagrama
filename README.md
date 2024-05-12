@@ -27,7 +27,7 @@ cp .env.example .env
 
 composer install
 
-sail up -d
+./vendor/bin/sail up -d
 
 ```
 
@@ -53,4 +53,5 @@ Fazer tudo em 24h é bem puxado kkkkk Faltaram algumas coisas, como:
 - Update nas tabelas ao fazer submit de algum formulário
 - Boas práticas no frontend
 - Etc.
-Mas é isso, dei meu máximo e me diverti demais
+
+Mas é isso, dei meu máximo e me virei pra aprender Laravel do zero nessa semana kkkkkk me diverti demais. 
