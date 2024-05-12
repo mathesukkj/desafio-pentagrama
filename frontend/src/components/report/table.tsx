@@ -108,10 +108,18 @@ export const ReportTable: FC<RoadsProps> = ({
                               {chunk.map((e) => (
                                 <>
                                   <TableCell>
+                                    <div className="text-md pb-2 border-b">
+                                      <span className="font-bold">Bairro</span>:{" "}
+                                      {e.name}
+                                    </div>
                                     <span className="font-bold text-md">
-                                      Bairro
+                                      Ruas:{" "}
                                     </span>
-                                    : {e.name}
+                                    {e.roads.map((road) => (
+                                      <span className="inline-block pr-3 py-2">
+                                        {road.name}
+                                      </span>
+                                    ))}
                                   </TableCell>
                                 </>
                               ))}
