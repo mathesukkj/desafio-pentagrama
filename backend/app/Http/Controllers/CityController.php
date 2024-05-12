@@ -12,7 +12,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        return City::paginate(50);
+        return City::paginate(10);
     }
 
     /**

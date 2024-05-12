@@ -1,6 +1,5 @@
 "use client";
 
-import { City, ListCitiesResponse } from "@/@types/city";
 import {
   Table,
   TableBody,
@@ -9,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -17,15 +16,16 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { ListRoadsResponse } from "@/@types/road";
 
-interface CitiesTableProps {
-  data: ListCitiesResponse;
+interface RoadsProps {
+  data: ListRoadsResponse;
   columns: ColumnDef<any, any>[];
   setCurrentPage: Dispatch<SetStateAction<number>>;
   currentPage: number;
 }
 
-export const CitiesTable: FC<CitiesTableProps> = ({
+export const RoadsTable: FC<RoadsProps> = ({
   data,
   columns,
   currentPage,

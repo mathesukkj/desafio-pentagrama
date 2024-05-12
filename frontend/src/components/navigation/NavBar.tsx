@@ -16,6 +16,9 @@ export default function NavBar() {
           <NavigationMenuItem>
             <Link href="/neighborhoods">Bairros</Link>
           </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href="/roads">Ruas</Link>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
     </div>

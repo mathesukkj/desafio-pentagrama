@@ -99,7 +99,7 @@ export const NeighborhoodsTable: FC<NeighborhoodsProps> = ({
           {"<"}
         </button>
         <span>
-          Page {currentPage} of {data.last_page}
+          Página {currentPage} de {data.last_page}
         </span>
         <button
           onClick={handleNextPage}
