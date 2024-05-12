@@ -16,6 +16,8 @@ e rua, data da fundação (período inicial e final). Exibir relacionamentos
 entre os registros, permitir edição e deleção de elementos.
 
 ## Como iniciar o projeto?
+Após clonar a repo:
+
 ### Backend (usando Sail)
 
 ```sh
@@ -42,3 +44,13 @@ cd frontend
 ```
 
 O frontend irá iniciar em localhost:3000
+
+
+#### Obs:
+Fazer tudo em 24h é bem puxado kkkkk Faltaram algumas coisas, como:
+- Testes
+- Edicão e delecão de ruas e bairros (Apenas as cidades possuem essa funcão)
+- Update nas tabelas ao fazer submit de algum formulário
+- Boas práticas no frontend
+- Etc.
+Mas é isso, dei meu máximo e me diverti demais
