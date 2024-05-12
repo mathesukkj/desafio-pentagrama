@@ -12,7 +12,7 @@ class NeighborhoodController extends Controller
      */
     public function index()
     {
-        return Neighborhood::paginate(50);
+        return Neighborhood::with("city")->paginate(50);
     }
 
     /**

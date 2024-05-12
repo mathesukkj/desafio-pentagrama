@@ -12,7 +12,7 @@ class RoadController extends Controller
      */
     public function index()
     {
-        return Road::paginate(50);
+        return Road::with("neighborhood")->paginate(50);
     }
 
     /**
