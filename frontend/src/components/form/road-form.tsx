@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import React from "react";
 import { createRoad } from "@/repositories/roads/createRoad";
 import { editRoad } from "@/repositories/roads/editRoad";
+import { CepResponse } from "@/@types/utils";
 
 interface RoadFormProps {
   formId?: string;
@@ -42,9 +43,38 @@ export const RoadForm: React.FC<RoadFormProps> = ({ formId }) => {
     },
   });
 
+  const onChangeCEP = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length == 8) {
+      const res = await fetch(
+        `https://viacep.com.br/ws/${e.target.value}/json/`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const cepData = (await res.json()) as CepResponse;
+      form.setValue("name", cepData.logradouro);
+      form.setValue("neighborhood_id", 1);
+    }
+  };
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormItem>
+          <FormLabel>CEP:</FormLabel>
+          <FormControl>
+            <Input
+              placeholder="31888-220"
+              onChange={onChangeCEP}
+              maxLength={8}
+            />
+          </FormControl>
+          <FormMessage />
+        </FormItem>
         <FormField
           control={form.control}
           name="name"
