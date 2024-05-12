@@ -17,13 +17,9 @@ export const deleteCity = async (id: number) => {
       },
     });
 
-    const response = await res.json();
-
     if (!res.ok) {
-      throw new Error(response.message);
+      throw new Error("Erro desconhecido");
     }
-
-    return response as City;
   } catch (error) {
     handleError(error as Error);
   }

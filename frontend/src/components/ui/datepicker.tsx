@@ -16,21 +16,32 @@ import {
 interface DatePickerProps {
   date: any;
   setDate: any;
+  className?: string;
+  placeholder?: string;
 }
 
-export const DatePicker: React.FC<DatePickerProps> = ({ date, setDate }) => {
+export const DatePicker: React.FC<DatePickerProps> = ({
+  date,
+  setDate,
+  className,
+  placeholder,
+}) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
           className={cn(
-            "w-full justify-start text-left font-normal",
+            "w-full justify-start text-left font-normal " + className,
             !date && "text-muted-foreground"
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? format(date, "PPP") : <span>Pick a date</span>}
+          {date ? (
+            format(date, "PPP")
+          ) : (
+            <span>{placeholder ?? "Escolha uma data"}</span>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

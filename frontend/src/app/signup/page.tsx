@@ -10,7 +10,7 @@ export default function Signup() {
 
   const handleSubmit = (token: string) => {
     localStorage.setItem("token", token);
-    // router.push("/dashboard");
+    router.push("/cities");
   };
 
   return (

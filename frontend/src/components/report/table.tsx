@@ -20,7 +20,8 @@ import { ReportResponse } from "@/@types/report";
 import { NeighborhoodsTable } from "../neighborhoods/table";
 import { NeighborhoodsColumns } from "../neighborhoods/columns";
 import { Button } from "../ui/button";
-import ReportModal from "./modal";
+import ReportModal from "./editDeleteCityModal";
+import { Road } from "@/@types/road";
 
 interface RoadsProps {
   data: ReportResponse;
@@ -54,7 +55,7 @@ export const ReportTable: FC<RoadsProps> = ({
     }
   };
 
-  function chunkNeighborhoods(array, chunkSize) {
+  function chunkNeighborhoods(array: any[], chunkSize: number) {
     const chunks = [];
     for (let i = 0; i < array.length; i += chunkSize) {
       chunks.push(array.slice(i, i + chunkSize));
@@ -121,7 +122,7 @@ export const ReportTable: FC<RoadsProps> = ({
                                 <span className="font-bold text-md">
                                   Ruas:{" "}
                                 </span>
-                                {e.roads.map((road, i) => (
+                                {e.roads.map((road: Road, i: number) => (
                                   <span
                                     key={i}
                                     className="inline-block pr-3 py-2"
@@ -142,7 +143,7 @@ export const ReportTable: FC<RoadsProps> = ({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                Nenhum resultado encontrado.
               </TableCell>
             </TableRow>
           )}

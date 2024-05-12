@@ -16,7 +16,7 @@ class RoadSeeder extends Seeder
         $neighborhoodIds = Neighborhood::pluck('id')->all();
 
         foreach ($neighborhoodIds as $neighborhoodId) {
-            Road::factory()->count(20)->create([
+            Road::factory()->count(10)->create([
                 'neighborhood_id' => $neighborhoodId,
             ]);
         }

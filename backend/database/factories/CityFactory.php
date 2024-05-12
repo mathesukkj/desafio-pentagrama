@@ -19,7 +19,7 @@ class CityFactory extends Factory
         return [
             'name' => fake()->city(),
             'state' => fake()->stateAbbr(),
-            'foundation_date' => fake()->dateTimeBetween('-500 years', "now")
+            'foundation_date' => fake()->dateTimeBetween('-100 years', "now")
         ];
     }
 }

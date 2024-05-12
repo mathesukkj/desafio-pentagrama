@@ -17,7 +17,7 @@ class NeighborhoodSeeder extends Seeder
         $cityIds = City::pluck('id')->all();
 
         foreach ($cityIds as $cityId) {
-            Neighborhood::factory()->count(50)->create([
+            Neighborhood::factory()->count(20)->create([
                 'city_id' => $cityId,
             ]);
         }

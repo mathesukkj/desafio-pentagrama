@@ -13,7 +13,7 @@ return new class () extends Migration {
         Schema::create('roads', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->foreignId("neighborhood_id")->constrained();
+            $table->foreignId("neighborhood_id")->constrained()->onDelete("cascade");
             $table->timestamps();
         });
     }

@@ -51,7 +51,10 @@ export const CityForm: React.FC<AuthFormProps> = ({
     onClose();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (e: any) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     if (formId) {
       await deleteCity(formId);
 

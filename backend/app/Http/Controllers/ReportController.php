@@ -27,11 +27,14 @@ class ReportController extends Controller
             });
         }
 
-        if($request->has("start_foundation_date")) {
+        if($request->has("start_foundation_date") && $request->has("end_foundation_date")) {
+            $query->whereBetween("foundation_date", [
+                $request->query("start_foundation_date"),
+                $request->query("end_foundation_date")
+            ]);
+        } elseif($request->has("start_foundation_date")) {
             $query->where("foundation_date", ">=", $request->query("start_foundation_date"));
-        }
-
-        if($request->has("end_foundation_date")) {
+        } elseif($request->has("end_foundation_date")) {
             $query->where("foundation_date", "<", $request->query("end_foundation_date"));
         }
 
