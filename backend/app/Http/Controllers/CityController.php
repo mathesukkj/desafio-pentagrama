@@ -10,9 +10,17 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return City::paginate(10);
+        $query = City::query();
+        $paginate = 10;
+        if($request->has("city_name")) {
+            $query->where('name', "like", "%" . $request->query("city_name") . "%");
+        }
+        if($request->has("items_per_page")) {
+            $paginate = $request->query("items_per_page");
+        }
+        return $query->paginate($paginate);
     }
 
     /**

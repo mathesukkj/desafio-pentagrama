@@ -7,7 +7,10 @@ export const editNeighborhood = async (
   id: string
 ) => {
   try {
-    const token = localStorage.getItem("token");
+    let token;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token");
+    }
 
     const res = await fetch(`http://localhost:80/api/login/${id}`, {
       method: "PUT",

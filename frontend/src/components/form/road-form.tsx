@@ -65,7 +65,7 @@ export const RoadForm: React.FC<RoadFormProps> = ({ formId }) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormItem>
-          <FormLabel>CEP:</FormLabel>
+          <FormLabel>CEP: (opcional)</FormLabel>
           <FormControl>
             <Input
               placeholder="31888-220"

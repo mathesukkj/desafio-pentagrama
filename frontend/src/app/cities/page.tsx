@@ -14,7 +14,7 @@ export default function Cities() {
 
   const { data } = useQuery({
     queryKey: ["listCities", currentPage],
-    queryFn: () => listCities(currentPage),
+    queryFn: () => listCities({ page: currentPage }),
   });
 
   return (

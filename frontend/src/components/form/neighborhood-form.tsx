@@ -13,9 +13,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { createNeighborhood } from "@/repositories/neighborhoods/createNeighborhood";
 import { editNeighborhood } from "@/repositories/neighborhoods/editNeighborhood";
+import { ComboBox } from "../ui/combobox";
+import { useQuery } from "@tanstack/react-query";
+import { listCities } from "@/repositories/cities/listCities";
 
 interface NeighborhoodFormProps {
   formId?: string;
@@ -31,11 +34,21 @@ const formSchema = z.object({
 export const NeighborhoodForm: React.FC<NeighborhoodFormProps> = ({
   formId,
 }) => {
+  const [searchedValue, setSearchedValue] = useState("");
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const response = formId
       ? await editNeighborhood(values, formId)
       : await createNeighborhood(values);
   };
+
+  const { data } = useQuery({
+    queryKey: ["listCities", searchedValue],
+    queryFn: () =>
+      listCities({
+        itemsPerPage: 9999,
+      }),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,10 +79,18 @@ export const NeighborhoodForm: React.FC<NeighborhoodFormProps> = ({
           render={({ field }) => (
             <FormItem>
               <FormLabel>Id da cidade:</FormLabel>
-              <FormControl>
-                <Input placeholder="1" type="number" {...field} />
-              </FormControl>
-              <FormMessage />
+              <ComboBox
+                value={field.value}
+                setValue={(val) => form.setValue("city_id", val as number)}
+                list={
+                  data
+                    ? data.data.map((e) => ({
+                        value: e.id,
+                        label: e.name,
+                      }))
+                    : []
+                }
+              />
             </FormItem>
           )}
         />

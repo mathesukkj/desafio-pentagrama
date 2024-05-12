@@ -3,7 +3,10 @@ import { handleError } from "@/components/error/ErrorToast";
 
 export const createRoad = async (payload: RoadPayload) => {
   try {
-    const token = localStorage.getItem("token");
+    let token;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token");
+    }
 
     const res = await fetch(`http://localhost:80/api/roads`, {
       method: "POST",

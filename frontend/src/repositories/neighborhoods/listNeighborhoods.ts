@@ -3,7 +3,10 @@ import { handleError } from "@/components/error/ErrorToast";
 
 export const listNeighborhoods = async (page: number) => {
   try {
-    const token = localStorage.getItem("token");
+    let token;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token");
+    }
 
     const res = await fetch(
       `http://localhost:80/api/neighborhoods?page=${page}`,

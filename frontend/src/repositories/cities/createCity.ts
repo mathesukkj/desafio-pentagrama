@@ -3,7 +3,10 @@ import { handleError } from "@/components/error/ErrorToast";
 
 export const createCity = async (payload: CityPayload) => {
   try {
-    const token = localStorage.getItem("token");
+    let token;
+    if (typeof window !== "undefined") {
+      token = localStorage.getItem("token");
+    }
 
     const res = await fetch(`http://localhost:80/api/cities`, {
       method: "POST",
